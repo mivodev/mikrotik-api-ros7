@@ -1,17 +1,14 @@
 {
     "name": "mivodev/mikrotik-api-ros7",
-    "description": "Mivo Enterprise Mikrotik API for RouterOS v7",
+    "description": "Mivo Enterprise Mikrotik API for RouterOS v7 (Framework-Agnostic)",
     "type": "library",
+    "require": {
+        "php": "^8.2 | ^8.3",
+        "ext-sockets": "*"
+    },
     "autoload": {
         "psr-4": {
             "Mivo\\MikrotikRos7\\": "src/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Mivo\\MikrotikRos7\\MikrotikRos7ServiceProvider"
-            ]
         }
     }
 }
