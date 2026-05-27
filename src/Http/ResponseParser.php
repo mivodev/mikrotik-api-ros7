@@ -14,12 +14,11 @@ class ResponseParser
     /**
      * Parse the HTTP response.
      *
-     * @param  string  $body        The raw JSON response body.
-     * @param  int     $statusCode  The HTTP status code.
+     * @param  string  $body  The raw JSON response body.
+     * @param  int  $statusCode  The HTTP status code.
+     * @return array The parsed data as an array.
      *
-     * @return array  The parsed data as an array.
-     *
-     * @throws MikrotikException  If the response indicates an error.
+     * @throws MikrotikException If the response indicates an error.
      */
     public static function parse(string $body, int $statusCode): array
     {
@@ -49,13 +48,13 @@ class ResponseParser
         // The REST API usually wraps lists in arrays.
         // If it returns a single object or empty, we wrap it to maintain
         // compatibility with the ROS6 Socket structure (which always returns arrays of rows).
-        if (!is_array($data) || (empty($data) && $body !== '[]')) {
+        if (! is_array($data) || (empty($data) && $body !== '[]')) {
             return $data !== null && $data !== '' ? [$data] : [];
         }
 
         // If it's an associative array, it's a single row response, wrap it in an array
         // (unless we are just returning standard status which we can leave as is)
-        if (!empty($data) && self::isAssoc($data)) {
+        if (! empty($data) && self::isAssoc($data)) {
             return [$data];
         }
 

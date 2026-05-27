@@ -19,10 +19,10 @@ interface ClientInterface
      * Set connection credentials and host.
      * Unlike ROS6 sockets, REST is stateless. This just configures the client.
      *
-     * @param  string  $host      IP address or hostname of the router.
+     * @param  string  $host  IP address or hostname of the router.
      * @param  string  $username  RouterOS username.
      * @param  string  $password  RouterOS password.
-     * @param  int     $port      API port (default: 443 for HTTPS, 80 for HTTP).
+     * @param  int  $port  API port (default: 443 for HTTPS, 80 for HTTP).
      */
     public function connect(string $host, string $username = 'admin', string $password = '', int $port = 443): bool;
 
@@ -75,7 +75,7 @@ interface ClientInterface
      *   comm('/system/reboot') -> POST /rest/system/reboot
      *
      * @param  string  $command  RouterOS CLI command path.
-     * @param  array   $params   Parameters.
+     * @param  array  $params  Parameters.
      */
     public function comm(string $command, array $params = []): array;
 }

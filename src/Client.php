@@ -34,9 +34,13 @@ use Mivo\MikrotikRos7\Http\ResponseParser;
 class Client implements ClientInterface
 {
     protected string $host = '';
+
     protected string $username = '';
+
     protected string $password = '';
+
     protected int $port = 443;
+
     protected string $scheme = 'https';
 
     /**
@@ -92,8 +96,8 @@ class Client implements ClientInterface
      */
     public function get(string $endpoint, array $params = []): array
     {
-        if (!empty($params)) {
-            $endpoint .= (str_contains($endpoint, '?') ? '&' : '?') . http_build_query($params);
+        if (! empty($params)) {
+            $endpoint .= (str_contains($endpoint, '?') ? '&' : '?').http_build_query($params);
         }
 
         return $this->request('GET', $endpoint);
@@ -144,19 +148,18 @@ class Client implements ClientInterface
     /**
      * Execute the HTTP request using cURL.
      *
-     * @param  string  $method    HTTP Method (GET, POST, PUT, PATCH, DELETE)
+     * @param  string  $method  HTTP Method (GET, POST, PUT, PATCH, DELETE)
      * @param  string  $endpoint  Endpoint (e.g., /rest/ip/address)
-     * @param  array   $payload   Data payload
-     *
-     * @return array  Parsed JSON response
+     * @param  array  $payload  Data payload
+     * @return array Parsed JSON response
      */
     protected function request(string $method, string $endpoint, array $payload = []): array
     {
-        if (!$this->isConnected()) {
+        if (! $this->isConnected()) {
             throw MikrotikException::connectionFailed('unknown', 'Client is not connected. Call connect() first.');
         }
 
-        $url = "{$this->scheme}://{$this->host}:{$this->port}/" . ltrim($endpoint, '/');
+        $url = "{$this->scheme}://{$this->host}:{$this->port}/".ltrim($endpoint, '/');
 
         $this->debug(">>> [REST] {$method} {$url}");
 
@@ -166,7 +169,7 @@ class Client implements ClientInterface
             'Accept: application/json',
         ];
 
-        if (!empty($payload)) {
+        if (! empty($payload)) {
             $jsonPayload = json_encode($payload);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonPayload);
             $headers[] = 'Content-Type: application/json';
@@ -180,7 +183,7 @@ class Client implements ClientInterface
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_USERPWD, "{$this->username}:{$this->password}");
 
-        if (!$this->verifySsl) {
+        if (! $this->verifySsl) {
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         }
@@ -206,7 +209,7 @@ class Client implements ClientInterface
     protected function debug(string $message): void
     {
         if ($this->debug) {
-            echo $message . "\n";
+            echo $message."\n";
         }
     }
 }
