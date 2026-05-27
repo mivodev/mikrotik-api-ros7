@@ -1,14 +1,43 @@
 {
     "name": "mivodev/mikrotik-api-ros7",
-    "description": "Mivo Enterprise Mikrotik API for RouterOS v7 (Framework-Agnostic)",
+    "description": "Complete, universal PHP client for Mikrotik RouterOS v7 REST API. Framework-agnostic, zero-dependency.",
+    "version": "0.1.0-dev",
     "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/mivodev/mikrotik-api-ros7",
+    "support": {
+        "issues": "https://github.com/mivodev/mikrotik-api-ros7/issues",
+        "source": "https://github.com/mivodev/mikrotik-api-ros7"
+    },
+    "keywords": [
+        "mikrotik",
+        "routeros",
+        "api",
+        "ros7",
+        "rest",
+        "curl",
+        "hotspot",
+        "pppoe",
+        "radius",
+        "isp"
+    ],
+    "authors": [
+        {
+            "name": "Mivodev",
+            "homepage": "https://github.com/mivodev",
+            "role": "Developer"
+        }
+    ],
     "require": {
-        "php": "^8.2 | ^8.3",
-        "ext-sockets": "*"
+        "php": "^8.2",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
             "Mivo\\MikrotikRos7\\": "src/"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
